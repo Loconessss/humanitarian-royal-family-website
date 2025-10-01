@@ -322,7 +322,7 @@
             <button class="red-button mt-12 py-3 px-10 rounded-full text-lg font-bold">LOAD MORE</button>
         </section>
         
-        <!-- 4. Secțiunea "Implică-te" (Get Involved) - PĂSTRATĂ AICI -->
+        <!-- 4. Secțiunea "Implică-te" (Get Involved) - MODIFICARE CRITICĂ AICI -->
         <section id="getinvolved" class="py-20 md:py-28 text-center bg-white rounded-3xl card-shadow p-8">
             <h2 class="text-4xl md:text-5xl font-bold mb-4 red-text uppercase">Get Involved & Make a Difference</h2>
             <div class="section-separator mx-auto mb-16"></div>
@@ -331,15 +331,15 @@
             </p>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Opțiune 1: Donații - Cu imagine și buton care apelează funcția JS -->
+                <!-- Opțiune 1: Donații - ACUM LINK REAL CATRE donate.html -->
                 <div class="p-6 rounded-xl text-center border border-gray-200">
                     <h3 class="text-2xl font-bold mb-4 red-text uppercase tracking-wider">SUPPORT OUR MISSION</h3>
                     <!-- Imagine adăugată pentru donații -->
                     <img src="https://placehold.co/600x400/facc15/1f2937?text=DONATE+TODAY" alt="Donații" class="w-full h-48 object-cover rounded-lg mb-4">
                     <p class="text-sm text-gray-600 mb-4">Fiecare donație aduce speranță și sprijin acolo unde este cea mai mare nevoie.</p>
                     
-                    <!-- Butonul unic de donatii care apelează funcția JS. -->
-                    <a href="#" onclick="goToDonatePage(event)" class="red-button font-bold py-3 px-6 rounded-full text-md w-full inline-block">
+                    <!-- LINKUL CORECTAT -->
+                    <a href="donate.html" class="red-button font-bold py-3 px-6 rounded-full text-md w-full inline-block">
                         DONATE NOW
                     </a>
                 </div>
@@ -456,17 +456,6 @@
             setTimeout(() => {
                 modal.style.display = 'none';
             }, 300);
-        }
-
-        /**
-         * Simulează redirecționarea către donate.html și informează utilizatorul despre limitarea iframe-ului.
-         */
-        window.goToDonatePage = function(event) {
-            event.preventDefault(); // Oprește acțiunea implicită a link-ului (navigare sau scroll)
-            showModal(
-                'Redirecționare către pagina de Donații', 
-                'Butonul funcționează! Pentru a vedea pagina de donații (donate.html), te rog să o deschizi direct din lista de fișiere, deoarece mediul de previzualizare blochează navigarea reală între fișierele HTML.'
-            );
         }
 
         // Handle contact form submission
