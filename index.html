@@ -1,497 +1,304 @@
 <!DOCTYPE html>
-<html lang="ro" class="scroll-smooth">
+<html lang="ro">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Humanitarian Royal Family - Alianța Umanității</title>
+    <title>Humanitarian Royal Family - Acasă</title>
+    <!-- Incarca Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Incarca Fontul Inter (Tailwind Default) -->
     <style>
-        :root {
-            --color-white: #ffffff;
-            --color-dark: #1f2937; /* Dark Gray for text */
-            --color-red: #dc2626; /* Strong Red accent */
-            --color-yellow: #facc15; /* Bright Yellow accent, used for accents/highlights */
-            --color-light-gray: #f9fafb;
-            --color-logo-gold: #c39a58; /* Goldish tone from the logo */
-            --color-deep-gold: #b4904b; /* O nuanță mai profundă de auriu pentru fundal */
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
         body {
-            background-color: var(--color-light-gray);
             font-family: 'Inter', sans-serif;
-            color: var(--color-dark);
-            line-height: 1.6;
+            background-color: #f7f7f7;
+            color: #1e1e1e;
         }
-        h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-            color: var(--color-dark);
+        .header-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
         }
-        .red-text {
-            color: var(--color-red);
-        }
-        .yellow-text {
-            color: var(--color-deep-gold); /* Folosim auriu profund pentru a se potrivi */
-        }
-        .red-border {
-            border-color: var(--color-red);
-        }
-        .red-button {
-            background-color: var(--color-red);
-            color: var(--color-white);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .red-button:hover {
-            background-color: #b91c1c; 
-            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
-            transform: translateY(-1px);
-        }
-        .yellow-highlight-box {
-            background-color: var(--color-yellow);
-            color: var(--color-dark);
-        }
-        .nav-link {
-            transition: color 0.3s ease;
-            color: var(--color-dark);
-        }
-        .nav-link:hover {
-            color: var(--color-red);
-        }
-        .section-separator {
-            width: 80px;
-            height: 3px;
-            background-color: var(--color-red);
-            margin-left: 0;
-        }
-        .card-shadow {
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-        }
-        .card-shadow:hover {
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        }
-        /* Ajustări pentru logo-ul nou - Mărime mărită */
-        .logo-image {
-            /* Mărimi ajustate pentru vizibilitate clară */
-            width: 180px; 
-            max-height: 90px; 
-            height: auto;
-            object-fit: contain;
-            filter: none;
-        }
-        .team-member-img {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 9999px; /* circle */
-            border: 3px solid var(--color-yellow);
-        }
-        
-        /* Stilul GOLD pentru fundalul Hero */
-        .hero-gold-background {
-            background-color: var(--color-deep-gold);
-            height: 24rem; /* 96 */
+        /* Culori Personalizate */
+        .color-gold { color: #d4af37; } /* Auriu */
+        .bg-color-gold { background-color: #d4af37; }
+        .color-maroon { color: #800000; } /* Maro-roșu închis (roșu de la butonul donate) */
+        .bg-color-maroon { background-color: #800000; }
+
+        /* Stil pentru Headings mari (simulare font elegant) */
+        .heading-font {
+            font-family: 'Georgia', serif; /* Folosim un font serif elegant ca placeholder */
+            letter-spacing: -0.05em;
         }
     </style>
 </head>
-<body class="bg-[var(--color-light-gray)] text-[var(--color-dark)]">
-    <!-- Modal for messages -->
-    <div id="message-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4" style="background-color: rgba(0,0,0,0.7);">
-        <div class="bg-white rounded-2xl p-8 max-w-sm w-full border-t-8 border-[var(--color-red)] shadow-lg text-center transform scale-95 transition-all duration-300">
-            <h3 id="modal-title" class="text-2xl red-text font-bold mb-4"></h3>
-            <p id="modal-message" class="mb-6"></p>
-            <button onclick="closeModal()" class="red-button font-bold py-2 px-6 rounded-lg transition-all duration-300">Închide</button>
-        </div>
-    </div>
+<body>
 
-    <!-- Antet (Header) -->
-    <header class="bg-white p-4 md:p-6 sticky top-0 z-40 shadow-sm border-b border-gray-100">
-        <nav class="container mx-auto flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <a href="#acasa" class="nav-link">
-                <!-- LOGO-UL ESTE INSERAT AICI -->
-                <img 
-                    src="https://lh3.googleusercontent.com/gg/AAHar4cOgpvnY6yC7KUe_R5KLJxmrnnpRFctSyHFUHk1EUtT3naoSP5xC73IVhVeGz0lP_YWh-iIORpz3PFya8NOZiYm1e3Stu5VGKRodEMTxVbCLFSLtaCz9ykhxE2P7p-xWflQF7sCfgDFFYvuHSfhaEuM0YlVSoadnFzJutELZgoPbKgk57y2OjjUCcJpKs9jCILPlhcaDyFqCgorysleUR3Kxl0IVNvRCR042zjZupUgiYdki97zP88K4fkAQCtD3MoivbtMYulYLynQlZwYRMkbLHLg_nb_SBQ=d" 
-                    alt="Logo Humanitarian Royal Family" 
-                    class="logo-image"
-                    onerror="this.onerror=null; this.src='https://placehold.co/180x90/dc2626/ffffff?text=HRF+LOGO'"
-                >
-            </a>
-            <ul class="flex flex-wrap justify-center space-x-4 md:space-x-8 text-lg font-semibold uppercase tracking-wider">
-                <li><a href="#despre" class="nav-link">About</a></li>
-                <li><a href="#galerie" class="nav-link">Gallery</a></li>
-                <li><a href="#events" class="nav-link">Events</a></li>
-                <li><a href="#getinvolved" class="nav-link">Get Involved</a></li>
-                <li><a href="#news" class="nav-link">News</a></li>
-            </ul>
-        </nav>
+    <!-- Antet (Header) si Navigatie -->
+    <header class="bg-white header-shadow sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center space-x-2">
+                <!-- Sursa imaginii logo din fisa de design - folosim o sursa de imagine locala sau placeholder pentru logo-ul complex-->
+                <img src="https://placehold.co/40x40/d4af37/800000?text=HRF" alt="Humanitarian Royal Family Logo" class="h-10 w-10">
+                <span class="text-lg font-bold color-maroon hidden sm:block">HUMANITARIAN ROYAL FAMILY</span>
+            </div>
+            <!-- Meniu Navigatie -->
+            <nav class="space-x-8 text-sm font-semibold tracking-wide">
+                <a href="#about" class="text-gray-600 hover:text-red-700 transition duration-300">DESPRE</a>
+                <a href="#gallery" class="text-gray-600 hover:text-red-700 transition duration-300">GALERIE</a>
+                <a href="#events" class="text-gray-600 hover:text-red-700 transition duration-300">EVENIMENTE</a>
+                <a href="#getinvolved" class="text-gray-600 hover:text-red-700 transition duration-300">IMPLICĂ-TE</a>
+                <a href="#news" class="text-gray-600 hover:text-red-700 transition duration-300">NOUTĂȚI</a>
+            </nav>
+        </div>
     </header>
 
-    <main class="container mx-auto px-4 md:px-8">
-        
-        <!-- Hero Section cu Culoare Gold și Text -->
-        <section id="acasa" class="py-12 md:py-20">
-            <div class="rounded-3xl overflow-hidden shadow-2xl bg-white border border-gray-200">
-                <div class="relative hero-gold-background">
-                    <!-- Am înlocuit imaginea cu un fundal de culoare gold (definit în CSS) -->
-                    
-                    <!-- Textul și Butonul de Acțiune -->
-                    <div class="absolute inset-0 flex flex-col items-center justify-center p-8 text-center bg-black bg-opacity-20">
-                        <h1 class="text-5xl md:text-7xl font-extrabold mb-4 leading-tight text-white uppercase">
-                            Bringing Hope & Support Worldwide
-                        </h1>
-                        <div class="mt-4">
-                            <a href="#getinvolved" class="red-button font-bold py-3 px-8 rounded-full text-xl inline-block transform transition-transform hover:scale-105">
-                                DISCOVER HOW YOU CAN HELP
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Secțiunea Misiune și Viziune -->
-                <div class="p-8 md:p-16">
-                    <div class="flex flex-col lg:flex-row gap-12">
-                        <!-- Coloana 1: Misiunea -->
-                        <div class="w-full lg:w-1/3 text-left">
-                            <h2 class="text-3xl font-bold mb-2 uppercase">OUR MISSION</h2>
-                            <div class="section-separator mb-8"></div>
-                            <p class="text-md leading-relaxed text-gray-700 mb-6">
-                                Empowering communities and providing aid with compassion and honor.
-                            </p>
-                            
-                            <div class="yellow-highlight-box p-4 rounded-lg shadow-md mt-4 text-center">
-                                <p class="font-semibold italic text-lg">"Compassion is the foundation to change"</p>
-                            </div>
-                        </div>
-
-                        <!-- Coloana 2 & 3: Viziunea și Află mai mult -->
-                        <div class="w-full lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-8">
-                            <div>
-                                <h3 class="text-xl font-bold red-text mb-2">OUR VISION</h3>
-                                <p class="text-sm text-gray-600 mb-1">Lorem ipsum dolor sit amet anet preeesio dlor Oplees oid</p>
-                                <span class="text-xs text-gray-500">Oct 26, 2023</span>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-bold red-text mb-2">OUR VISION</h3>
-                                <p class="text-sm text-gray-600 mb-1">Lorem ipsum dolor sit amet anet preeesio dlor Oplees oid</p>
-                                <span class="text-xs text-gray-500">Oct 26, 2023</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Secțiunea "Meet the Team" -->
-                    <div class="mt-20 text-center">
-                        <h2 class="text-3xl font-bold mb-10 uppercase">MEET THE TEAM</h2>
-                        <div class="flex justify-center space-x-8 flex-wrap gap-y-8">
-                            
-                            <div class="flex flex-col items-center">
-                                <img src="https://placehold.co/100x100/dc2626/ffffff?text=M" alt="Membru Echipa 1" class="team-member-img">
-                                <h4 class="font-semibold mt-3 text-lg">MEDICAL MISSION</h4>
-                                <p class="text-sm text-gray-500">Scarleteanu Matutin</p>
-                            </div>
-                            
-                            <div class="flex flex-col items-center">
-                                <img src="https://placehold.co/100x100/facc15/1f2937?text=H" alt="Membru Echipa 2" class="team-member-img">
-                                <h4 class="font-semibold mt-3 text-lg">HEALTH MISSION</h4>
-                                <p class="text-sm text-gray-500">Fratida Kora of Maotirem</p>
-                            </div>
-                            
-                            <div class="flex flex-col items-center">
-                                <img src="https://placehold.co/100x100/1f2937/facc15?text=D" alt="Membru Echipa 3" class="team-member-img">
-                                <h4 class="font-semibold mt-3 text-lg">DONATION PROJECT</h4>
-                                <p class="text-sm text-gray-500">Cermaged Ftoohrily</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 1. Secțiunea "Despre Noi" (About) - Ascunsă pentru a evita duplicarea -->
-        <section id="despre" class="py-20 md:py-28 text-center hidden">
-        </section>
-
-        <!-- 2. Secțiunea "Evenimente" (Events) -->
-        <section id="events" class="py-20 md:py-28 text-center">
-            <h2 class="text-4xl md:text-5xl font-bold mb-4 yellow-text uppercase">Upcoming Events</h2>
-            <div class="section-separator mx-auto mb-16"></div>
-            
-            <div class="flex flex-col lg:flex-row gap-12 bg-white rounded-3xl card-shadow p-8">
-                <!-- Stânga: Calendar (Simplificat) -->
-                <div class="w-full lg:w-1/3 text-left p-4 bg-gray-50 rounded-xl">
-                    <h3 class="text-xl font-bold mb-4 red-text">DECEMBER 2024</h3>
-                    <div class="grid grid-cols-7 gap-1 text-center text-sm font-medium">
-                        <span class="text-gray-500">S</span><span class="text-gray-500">M</span><span class="text-gray-500">T</span><span class="text-gray-500">W</span><span class="text-gray-500">T</span><span class="text-gray-500">F</span><span class="text-gray-500">S</span>
-                        <!-- Zile placeholder -->
-                        <span class="p-2">1</span><span class="p-2">2</span><span class="p-2">3</span><span class="p-2">4</span><span class="p-2">5</span><span class="p-2">6</span><span class="p-2">7</span>
-                        <span class="p-2">8</span><span class="p-2">9</span><span class="p-2">10</span><span class="p-2">11</span><span class="p-2 bg-yellow-400 rounded-full font-bold">12</span><span class="p-2">13</span><span class="p-2">14</span>
-                        <span class="p-2">15</span><span class="p-2">16</span><span class="p-2">17</span><span class="p-2">18</span><span class="p-2">19</span><span class="p-2 bg-red-500 text-white rounded-full font-bold">20</span><span class="p-2">21</span>
-                        <span class="p-2">22</span><span class="p-2">23</span><span class="p-2">24</span><span class="p-2 border border-red-500 rounded-full font-bold">25</span><span class="p-2">26</span><span class="p-2">27</span><span class="p-2">28</span>
-                        <span class="p-2">29</span><span class="p-2">30</span><span class="p-2">31</span>
-                    </div>
-
-                    <h3 class="text-xl font-bold mt-8 mb-4 red-text">PAST EVENTS</h3>
-                    <ul class="list-disc list-inside text-sm text-gray-600 space-y-2">
-                        <li>Serata de Binefacere 2023</li>
-                        <li>Campania Medicală 'Speranța'</li>
-                        <li>Balul Regal al Umanității</li>
-                    </ul>
-                </div>
-                
-                <!-- Dreapta: Lista Evenimente -->
-                <div class="w-full lg:w-2/3 space-y-6">
-                    <!-- Eveniment Urgent -->
-                    <div class="flex items-start bg-gray-50 p-4 rounded-xl border-l-8 border-[var(--color-red)] shadow-md">
-                        <img src="https://placehold.co/120x90/dc2626/ffffff?text=URGENT" alt="Urgent Food Drive" class="w-32 h-24 object-cover rounded-lg mr-4">
-                        <div class="text-left flex-grow">
-                            <span class="text-xs font-semibold red-text border border-red-500 px-2 py-0.5 rounded-full">URGENT</span>
-                            <h4 class="text-lg font-bold mt-1">EMERGENCY WINTER FOOD DRIVE</h4>
-                            <p class="text-sm text-gray-600 mb-2">December 28, 2024 | Sudan</p>
-                            <a href="#" class="bg-[var(--color-yellow)] text-[var(--color-dark)] font-semibold py-1.5 px-4 rounded-full text-xs">REGISTER NOW</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Eveniment Normal 1 -->
-                    <div class="flex items-start bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
-                        <img src="https://placehold.co/120x90/facc15/1f2937?text=CLINIC" alt="Mobile Health Clinic" class="w-32 h-24 object-cover rounded-lg mr-4">
-                        <div class="text-left flex-grow">
-                            <h4 class="text-lg font-bold red-text">MOBILE HEALTH CLINIC</h4>
-                            <p class="text-sm text-gray-600 mb-2">December 12, 2024</p>
-                            <a href="#" class="text-xs font-semibold red-text hover:underline">LEARN MORE &rarr;</a>
-                        </div>
-                    </div>
-                    
-                    <!-- Eveniment Normal 2 -->
-                    <div class="flex items-start bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
-                        <img src="https://placehold.co/120x90/dc2626/ffffff?text=SCHOOL" alt="School Supply Distribution" class="w-32 h-24 object-cover rounded-lg mr-4">
-                        <div class="text-left flex-grow">
-                            <h4 class="text-lg font-bold red-text">SCHOOL SUPPLY DISTRIBUTION</h4>
-                            <p class="text-sm text-gray-600 mb-2">December 5, 2024 | Ghana</p>
-                            <a href="#" class="text-xs font-semibold red-text hover:underline">LEARN MORE &rarr;</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 3. Secțiunea "Galerie" (Gallery) -->
-        <section id="galerie" class="py-20 md:py-28 text-center">
-            <h2 class="text-4xl md:text-5xl font-bold mb-4 red-text uppercase">Our Impact Gallery</h2>
-            <p class="text-lg mb-10 text-gray-700">Moments of compassion, hope and change from our projects worldwide</p>
-            
-            <!-- Filtrele Galeriei -->
-            <div class="flex justify-center space-x-3 mb-12 flex-wrap gap-y-4">
-                <button class="bg-[var(--color-yellow)] text-[var(--color-dark)] font-bold py-2 px-6 rounded-full text-sm hover:opacity-90 transition-opacity">ALL PROJECTS</button>
-                <button class="bg-white text-[var(--color-dark)] border border-gray-300 font-semibold py-2 px-6 rounded-full text-sm hover:border-[var(--color-red)] transition-colors">MEDICAL</button>
-                <button class="bg-white text-[var(--color-dark)] border border-gray-300 font-semibold py-2 px-6 rounded-full text-sm hover:border-[var(--color-red)] transition-colors">EDUCATION</button>
-                <button class="bg-white text-[var(--color-dark)] border border-gray-300 font-semibold py-2 px-6 rounded-full text-sm hover:border-[var(--color-red)] transition-colors">FOOD DRIVES</button>
+    <main>
+        <!-- Sectiunea Hero (Imagine Mare de Fundal) -->
+        <section id="hero" class="relative h-screen flex items-center justify-center text-center overflow-hidden">
+            <!-- Imaginea de Fundal (simulare imagine mare, vizibilă în design) -->
+            <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://placehold.co/1920x1080/4A4A4A/FFFFFF?text=Voluntari+oferind+ajutor+umanitar');">
+                <div class="absolute inset-0 bg-gray-800 opacity-50"></div>
             </div>
             
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-                <!-- Card Galerie 1 -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-md border-t-4 border-[var(--color-red)] card-shadow">
-                    <img src="https://placehold.co/600x450/dc2626/ffffff?text=MEDICAL+AID" alt="Medical Aid" class="w-full h-48 object-cover">
-                    <div class="p-4 text-left">
-                        <h4 class="font-semibold text-md mb-1">Winter Food Drive</h4>
-                        <span class="text-xs text-gray-500">Oct 26, 2023</span>
+            <div class="relative z-10 p-4 max-w-4xl">
+                <h1 class="heading-font text-5xl sm:text-7xl lg:text-8xl font-extrabold text-white mb-6 leading-tight">
+                    BRINGING HOPE & SUPPORT WORLDWIDE
+                </h1>
+                <a href="#getinvolved" class="inline-block bg-red-700 hover:bg-red-800 text-white font-bold py-4 px-10 rounded-full text-lg uppercase tracking-wider transition duration-300">
+                    DISCOVER HOW YOU CAN HELP
+                </a>
+            </div>
+        </section>
+
+        <!-- Sectiunea Misiune si Viziune -->
+        <section id="mission-vision" class="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Coloana 1: Misiune si Imagini -->
+                <div>
+                    <h2 class="text-4xl font-bold color-maroon heading-font mb-4 pb-2 border-b-2 border-red-700 inline-block">OUR MISSION & STORY</h2>
+                    <p class="text-gray-600 text-lg mb-6">Empowering communities and providing aid with compassion and honor.</p>
+                    
+                    <!-- Imaginea Misiunii (Simulare: barbati cu tableta) -->
+                    <img src="https://placehold.co/700x400/eeeeee/333333?text=Echipa+Humanitarian+Royal+Family" alt="Team reviewing mission details" class="w-full h-auto object-cover rounded-xl shadow-lg mb-8">
+                    
+                    <!-- Casuta de Citat Galben-Rosu -->
+                    <div class="p-6 bg-yellow-400 rounded-xl shadow-md border-l-4 border-red-700">
+                        <p class="text-xl font-semibold color-maroon">
+                            "Every act of kindness creates a ripple"
+                        </p>
                     </div>
                 </div>
-                <!-- Card Galerie 2 -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-md border-t-4 border-[var(--color-yellow)] card-shadow">
-                    <img src="https://placehold.co/600x450/facc15/1f2937?text=EDUCATION" alt="Education" class="w-full h-48 object-cover">
-                    <div class="p-4 text-left">
-                        <h4 class="font-semibold text-md mb-1">New School Project</h4>
-                        <span class="text-xs text-gray-500">Oct 26, 2023</span>
+
+                <!-- Coloana 2: Detalii Viziune si Impact -->
+                <div class="pt-4 lg:pt-16">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Viziunea 1 -->
+                        <div>
+                            <h3 class="text-xl font-bold color-maroon uppercase mb-2">OUR VISION</h3>
+                            <div class="w-10 h-1 bg-red-700 mb-3"></div>
+                            <p class="text-gray-700 text-sm">Lorem ipsum dolor sit amet preeesio dlor Oplees oid</p>
+                            <p class="text-xs text-gray-400 mt-2">Oct 26, 2023</p>
+                        </div>
+                        <!-- Viziunea 2 -->
+                        <div>
+                            <h3 class="text-xl font-bold color-maroon uppercase mb-2">EMPOWERING COMMUNITIES</h3>
+                            <div class="w-10 h-1 bg-red-700 mb-3"></div>
+                            <p class="text-gray-700 text-sm">Lorem ipsum dormum tus sitt paet tu aid thn of honor</p>
+                            <p class="text-xs text-gray-400 mt-2">Oct 26, 2023</p>
+                        </div>
+                        <!-- Viziunea 3 -->
+                        <div>
+                            <h3 class="text-xl font-bold color-maroon uppercase mb-2">OUR VISION</h3>
+                            <div class="w-10 h-1 bg-red-700 mb-3"></div>
+                            <p class="text-gray-700 text-sm">Lorem ipsum dolor sit amet preeesio dlor Oplees oid</p>
+                            <p class="text-xs text-gray-400 mt-2">Oct 26, 2023</p>
+                        </div>
                     </div>
-                </div>
-                <!-- Card Galerie 3 -->
-                <div class="bg-white rounded-xl overflow-hidden shadow-md border-t-4 border-[var(--color-red)] card-shadow">
-                    <img src="https://placehold.co/600x450/1f2937/facc15?text=FOOD+DRIVE" alt="Food Drive" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h4 class="font-semibold text-md mb-1">Medical Outreach</h4>
-                        <span class="text-xs text-gray-500">Oct 26, 2023</span>
-                    </div>
-                </div>
-                 <!-- Card Galerie 4 -->
-                 <div class="bg-white rounded-xl overflow-hidden shadow-md border-t-4 border-[var(--color-yellow)] card-shadow">
-                    <img src="https://placehold.co/600x450/dc2626/ffffff?text=FOOD+DRIVE" alt="Food Drive" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h4 class="font-semibold text-md mb-1">Emergency Relief</h4>
-                        <span class="text-xs text-gray-500">Oct 26, 2023</span>
+
+                    <!-- Echipa -->
+                    <div class="mt-12 text-center">
+                        <h3 class="text-2xl font-bold color-maroon heading-font mb-8 border-b-2 pb-2 inline-block border-gray-200">MEET THE TEAM</h3>
+                        <div class="flex flex-wrap justify-center gap-8">
+                            <!-- Membru 1 -->
+                            <div class="w-32">
+                                <img src="https://placehold.co/128x128/cccccc/333333?text=Foto" alt="Medical Mission Team Member" class="w-32 h-32 rounded-full object-cover mx-auto shadow-lg">
+                                <p class="mt-3 text-sm font-bold color-maroon">MEDICAL MISSION</p>
+                                <p class="text-xs text-gray-600">Sicantxil Maturin</p>
+                            </div>
+                            <!-- Membru 2 -->
+                            <div class="w-32">
+                                <img src="https://placehold.co/128x128/cccccc/333333?text=Foto" alt="Hireul Mission Team Member" class="w-32 h-32 rounded-full object-cover mx-auto shadow-lg">
+                                <p class="mt-3 text-sm font-bold color-maroon">HIREUL MISSION</p>
+                                <p class="text-xs text-gray-600">Fritadla kora of Maotireim</p>
+                            </div>
+                            <!-- Membru 3 -->
+                            <div class="w-32">
+                                <img src="https://placehold.co/128x128/cccccc/333333?text=Foto" alt="Daitees Project Team Member" class="w-32 h-32 rounded-full object-cover mx-auto shadow-lg">
+                                <p class="mt-3 text-sm font-bold color-maroon">DAITEES PROJECT</p>
+                                <p class="text-xs text-gray-600">Clermged Ftloohily</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <button class="red-button mt-12 py-3 px-10 rounded-full text-lg font-bold">LOAD MORE</button>
         </section>
-        
-        <!-- 4. Secțiunea "Implică-te" (Get Involved) - MODIFICARE CRITICĂ AICI -->
-        <section id="getinvolved" class="py-20 md:py-28 text-center bg-white rounded-3xl card-shadow p-8">
-            <h2 class="text-4xl md:text-5xl font-bold mb-4 red-text uppercase">Get Involved & Make a Difference</h2>
-            <div class="section-separator mx-auto mb-16"></div>
-            <p class="text-xl mb-12 font-light text-gray-700">
-                Join our mission to bring hope & support worldwide.
-            </p>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- Opțiune 1: Donații - ACUM LINK REAL CATRE donate.html -->
-                <div class="p-6 rounded-xl text-center border border-gray-200">
-                    <h3 class="text-2xl font-bold mb-4 red-text uppercase tracking-wider">SUPPORT OUR MISSION</h3>
-                    <!-- Imagine adăugată pentru donații -->
-                    <img src="https://placehold.co/600x400/facc15/1f2937?text=DONATE+TODAY" alt="Donații" class="w-full h-48 object-cover rounded-lg mb-4">
-                    <p class="text-sm text-gray-600 mb-4">Fiecare donație aduce speranță și sprijin acolo unde este cea mai mare nevoie.</p>
+        <!-- Sectiunea Stiri/Noutati Recente -->
+        <section id="news" class="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold color-maroon heading-font mb-10 pb-2 border-b-2 border-red-700 inline-block">LATEST NEWS</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Stirea 1 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden transition transform hover:scale-[1.02] duration-300">
+                    <img src="https://placehold.co/600x400/d4af37/800000?text=Proiect+Medical" alt="Medical mission in progress" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold color-maroon mb-2">MEDICAL MISSION</h3>
+                        <p class="text-gray-600 text-sm">Hes ar collum-tot Usche aid</p>
+                        <p class="text-xs text-gray-400 mt-2">Oct 26, 2023</p>
+                    </div>
+                </div>
+                <!-- Stirea 2 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden transition transform hover:scale-[1.02] duration-300">
+                    <img src="https://placehold.co/600x400/d4af37/800000?text=Scoala+Noua" alt="New school project" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold color-maroon mb-2">NEW SCHOOL PROJECT</h3>
+                        <p class="text-gray-600 text-sm">Thes ee nora eit haject eidr</p>
+                        <p class="text-xs text-gray-400 mt-2">Oct 26, 2023</p>
+                    </div>
+                </div>
+                <!-- Stirea 3 -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden transition transform hover:scale-[1.02] duration-300">
+                    <img src="https://placehold.co/600x400/d4af37/800000?text=Distribuire+Alimente" alt="Food distribution drive" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold color-maroon mb-2">WINTER FOOD DRIVE</h3>
+                        <p class="text-gray-600 text-sm">Yen air salisprive Uo Ddetio a</p>
+                        <p class="text-xs text-gray-400 mt-2">Oct 26, 2023</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sectiunea Implica-te (Get Involved) - Important! -->
+        <section id="getinvolved" class="py-16 md:py-24 bg-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-4xl font-bold color-maroon heading-font mb-3">GET INVOLVED & MAKE A DIFFERENCE</h2>
+                <p class="text-lg text-gray-600 mb-12">Join our mission to bring hope & support worldwide.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     
-                    <!-- LINKUL CORECTAT -->
-                    <a href="donate.html" class="red-button font-bold py-3 px-6 rounded-full text-md w-full inline-block">
-                        DONATE NOW
-                    </a>
-                </div>
-                
-                <!-- Opțiune 2: Voluntariat - PĂSTRATĂ AICI -->
-                <div class="p-6 rounded-xl text-center border border-gray-200">
-                    <h3 class="text-2xl font-bold mb-4 yellow-text">BECOME A VOLUNTEER</h3>
-                    <img src="https://placehold.co/600x400/dc2626/ffffff?text=VOLUNTEER" alt="Voluntariat" class="w-full h-48 object-cover rounded-lg mb-4">
-                    <p class="text-sm text-gray-600 mb-4">Lend a hand and an pert to sosrislee. All skills om welcome!</p>
-                    <button class="red-button font-bold py-3 px-6 rounded-full text-md">FILL OUT VOLUNTEER FORM</button>
-                </div>
-                
-                <!-- Opțiune 3: Parteneriate -->
-                <div class="p-6 rounded-xl text-center border border-gray-200">
-                    <h3 class="text-2xl font-bold mb-4 red-text">FORM A PARTNERSHIP</h3>
-                    <img src="https://placehold.co/600x400/1f2937/facc15?text=PARTNERSHIP" alt="Parteneriat" class="w-full h-48 object-cover rounded-lg mb-4">
-                    <p class="text-sm text-gray-600 mb-4">Colaborate s amplye us ampliify us ampact reering globaly</p>
-                    <button class="red-button font-bold py-3 px-6 rounded-full text-md">CONTACT US</button>
+                    <!-- Optiunea 1: DONATE NOW -->
+                    <div class="bg-white p-6 rounded-xl shadow-2xl border-t-4 border-yellow-500">
+                        <h3 class="text-xl font-bold color-maroon mb-4">DONATE NOW</h3>
+                        <p class="text-gray-600 mb-6">Fii un susținător și sprijină acolo unde este cea mai mare nevoie.</p>
+                        
+                        <!-- Butonul de Donație (Link catre donate.html) -->
+                        <a href="donate.html" class="inline-block bg-red-700 hover:bg-red-800 text-white font-bold py-3 px-6 rounded-full text-md w-full uppercase tracking-wider transition duration-300">
+                            DONATE NOW
+                        </a>
+                    </div>
+                    
+                    <!-- Optiunea 2: BECOME A VOLUNTEER -->
+                    <div class="bg-white p-6 rounded-xl shadow-2xl border-t-4 border-red-700">
+                        <h3 class="text-xl font-bold color-maroon mb-4">BECOME A VOLUNTEER</h3>
+                        <img src="https://placehold.co/300x200/d4af37/800000?text=Voluntari+Muncind" alt="Volunteers working" class="w-full h-36 object-cover rounded-lg mb-4">
+                        <p class="text-gray-600 text-sm">Lend a hand and an expert is needed. All skills are welcome!</p>
+                        <a href="#" class="mt-4 inline-block bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-6 rounded-full text-md w-full uppercase tracking-wider transition duration-300">
+                            FILL OUT VOLUNTEER FORM
+                        </a>
+                    </div>
+
+                    <!-- Optiunea 3: FORM A PARTNERSHIP -->
+                    <div class="bg-white p-6 rounded-xl shadow-2xl border-t-4 border-yellow-500">
+                        <h3 class="text-xl font-bold color-maroon mb-4">FORM A PARTNERSHIP</h3>
+                        <img src="https://placehold.co/300x200/d4af37/800000?text=Parteneriat" alt="Partnership handshake" class="w-full h-36 object-cover rounded-lg mb-4">
+                        <p class="text-gray-600 text-sm">Collaborate & amplify us, amplify us impacting steering globally.</p>
+                        <a href="#" class="mt-4 inline-block bg-red-700 hover:bg-red-800 text-white font-bold py-3 px-6 rounded-full text-md w-full uppercase tracking-wider transition duration-300">
+                            GET IN TOUCH
+                        </a>
+                    </div>
+                    
                 </div>
             </div>
         </section>
         
-        <!-- 5. Secțiunea "Noutăți" (News) -->
-        <section id="news" class="py-20 md:py-28 text-center">
-            <h2 class="text-4xl md:text-5xl font-bold mb-4 yellow-text uppercase">Latest News</h2>
-            <div class="section-separator mx-auto mb-16"></div>
+        <!-- Sectiunea Galerie / Proiecte -->
+        <section id="gallery" class="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold color-maroon heading-font mb-10 pb-2 border-b-2 border-red-700 inline-block">OUR IMPACT GALLERY</h2>
+            <p class="text-lg text-gray-600 mb-12">Moments of compassion, hope and change from our projects worldwide.</p>
             
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-                <!-- Articol 1 -->
-                <div class="bg-white rounded-xl overflow-hidden card-shadow">
-                    <img src="https://placehold.co/400x250/dc2626/ffffff?text=MEDICAL" alt="Medical Mission" class="w-full h-48 object-cover">
+            <!-- Filtre (Simulare) -->
+            <div class="flex space-x-4 mb-8">
+                <button class="bg-yellow-500 text-gray-900 font-semibold py-2 px-6 rounded-full transition duration-300">ALL PROJECTS</button>
+                <button class="bg-white text-gray-600 hover:bg-gray-100 font-semibold py-2 px-6 rounded-full transition duration-300 border">MEDICAL</button>
+                <button class="bg-white text-gray-600 hover:bg-gray-100 font-semibold py-2 px-6 rounded-full transition duration-300 border">EDUCATION</button>
+                <button class="bg-white text-gray-600 hover:bg-gray-100 font-semibold py-2 px-6 rounded-full transition duration-300 border">FOOD DRIVES</button>
+            </div>
+
+            <!-- Grid Galerie -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Element Galerie 1 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+                    <img src="https://placehold.co/600x400/d4af37/800000?text=Medical+Outreach+1" alt="Medical Outreach" class="w-full h-48 object-cover">
                     <div class="p-4">
-                        <h3 class="text-lg font-bold red-text mt-1 mb-1 uppercase">MEDICAL MISSION</h3>
-                        <p class="text-sm text-gray-700 mb-2">Hes ar collim-tot Usche aid</p>
-                        <span class="text-xs text-gray-500">Oct 26, 2023</span>
+                        <p class="text-sm font-bold color-maroon">Medical Outerach</p>
+                        <p class="text-xs text-gray-400">Oct 26, 2023</p>
                     </div>
                 </div>
-                <!-- Articol 2 -->
-                <div class="bg-white rounded-xl overflow-hidden card-shadow">
-                    <img src="https://placehold.co/400x250/facc15/1f2937?text=SCHOOL" alt="New School Project" class="w-full h-48 object-cover">
+                <!-- Element Galerie 2 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+                    <img src="https://placehold.co/600x400/d4af37/800000?text=New+School+Project" alt="New School Project" class="w-full h-48 object-cover">
                     <div class="p-4">
-                        <h3 class="text-lg font-bold yellow-text mt-1 mb-1 uppercase">NEW SCHOOL PROJECT</h3>
-                        <p class="text-sm text-gray-700 mb-2">Thes si nora el halect aidt</p>
-                        <span class="text-xs text-gray-500">Oct 26, 2023</span>
+                        <p class="text-sm font-bold color-maroon">New School Project</p>
+                        <p class="text-xs text-gray-400">Oct 26, 2023</p>
                     </div>
                 </div>
-                <!-- Articol 3 -->
-                <div class="bg-white rounded-xl overflow-hidden card-shadow">
-                    <img src="https://placehold.co/400x250/1f2937/facc15?text=FOOD+DRIVE" alt="Winter Food Drive" class="w-full h-48 object-cover">
+                <!-- Element Galerie 3 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+                    <img src="https://placehold.co/600x400/d4af37/800000?text=Winter+Food+Drive" alt="Winter Food Drive" class="w-full h-48 object-cover">
                     <div class="p-4">
-                        <h3 class="text-lg font-bold red-text mt-1 mb-1 uppercase">WINTER FOOD DRIVE</h3>
-                        <p class="text-sm text-gray-700 mb-2">Yen ar salisprive Do Destio a</p>
-                        <span class="text-xs text-gray-500">Oct 26, 2023</span>
+                        <p class="text-sm font-bold color-maroon">Winter Food Drive</p>
+                        <p class="text-xs text-gray-400">Oct 26, 2023</p>
+                    </div>
+                </div>
+                 <!-- Mai multe elemente galerie (placeholder) -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+                    <img src="https://placehold.co/600x400/d4af37/800000?text=Imagine+Galerie+4" alt="Gallery Image 4" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <p class="text-sm font-bold color-maroon">Water Well Project</p>
+                        <p class="text-xs text-gray-400">Oct 26, 2023</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+                    <img src="https://placehold.co/600x400/d4af37/800000?text=Imagine+Galerie+5" alt="Gallery Image 5" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <p class="text-sm font-bold color-maroon">Youth Mentorship</p>
+                        <p class="text-xs text-gray-400">Oct 26, 2023</p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition duration-300">
+                    <img src="https://placehold.co/600x400/d4af37/800000?text=Imagine+Galerie+6" alt="Gallery Image 6" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <p class="text-sm font-bold color-maroon">Medical Mission 2</p>
+                        <p class="text-xs text-gray-400">Oct 26, 2023</p>
                     </div>
                 </div>
             </div>
+
+            <div class="text-center mt-12">
+                <button class="bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold py-3 px-10 rounded-full text-md uppercase transition duration-300 shadow-md hover:shadow-lg">
+                    LOAD MORE
+                </button>
+            </div>
         </section>
 
-        <!-- Secțiunea "Contact" (Formularul a rămas) -->
-        <section id="contact" class="py-20 md:py-32 text-center max-w-2xl mx-auto">
-            <h2 class="text-4xl md:text-5xl font-bold mb-4 red-text uppercase">Contact Us</h2>
-            <div class="section-separator mx-auto mb-16"></div>
-            <p class="mb-10 text-lg text-gray-700">Ne puteți contacta pentru orice întrebări, solicitări de parteneriat sau detalii despre proiecte.</p>
-            <form id="contact-form" class="space-y-8 text-left">
-                <div>
-                    <label for="name" class="block mb-2 font-semibold text-lg text-[var(--color-dark)]">Numele dumneavoastră</label>
-                    <input type="text" id="name" name="name" required class="w-full bg-white border-b-2 border-red-400 focus:border-[var(--color-red)] focus:outline-none p-3 text-[var(--color-dark)] rounded-t-lg">
-                </div>
-                <div>
-                    <label for="email" class="block mb-2 font-semibold text-lg text-[var(--color-dark)]">Adresa de email</label>
-                    <input type="email" id="email" name="email" required class="w-full bg-white border-b-2 border-red-400 focus:border-[var(--color-red)] focus:outline-none p-3 text-[var(--color-dark)] rounded-t-lg">
-                </div>
-                <div>
-                    <label for="message" class="block mb-2 font-semibold text-lg text-[var(--color-dark)]">Mesajul dumneavoastră</label>
-                    <textarea id="message" name="message" rows="5" required class="w-full bg-white border-2 border-red-400 focus:border-[var(--color-red)] rounded-xl p-4 focus:outline-none text-[var(--color-dark)]"></textarea>
-                </div>
-                <div class="text-center">
-                    <button type="submit" class="red-button font-bold py-4 px-16 rounded-full text-xl transform transition-all duration-300 hover:scale-105">
-                        Trimite Mesajul
-                    </button>
-                </div>
-            </form>
-        </section>
     </main>
 
     <!-- Subsol (Footer) -->
-    <footer class="bg-white text-sm md:text-base py-10 text-center border-t-4 border-gray-200 mt-20">
-        <p class="text-gray-600">&copy; 2024 Humanirtian Royal Family. Toate drepturile rezervate.</p>
-        <div class="mt-6 flex justify-center space-x-6 text-lg">
-            <a href="#" class="nav-link hover:text-red-600">Facebook</a>
-            <a href="#" class="nav-link hover:text-red-600">Instagram</a>
-            <a href="#" class="nav-link hover:text-red-600">LinkedIn</a>
+    <footer class="bg-white border-t border-gray-200 py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500">
+            <p>&copy; 2023 Humanirtian Royal Family</p>
         </div>
     </footer>
-    
-    <script type="module">
-        // --- Core Application Logic ---
 
-        // Functie pentru a arata un modal personalizat in loc de alert()
-        function showModal(title, message) {
-            const modal = document.getElementById('message-modal');
-            const modalContent = modal.querySelector('div');
-            document.getElementById('modal-title').innerText = title;
-            document.getElementById('modal-message').innerText = message;
-            modal.style.display = 'flex';
-            modalContent.style.transform = 'scale(1)';
-        }
-
-        // Functie pentru a inchide modalul personalizat
-        window.closeModal = function() {
-            const modal = document.getElementById('message-modal');
-            const modalContent = modal.querySelector('div');
-            modalContent.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 300);
-        }
-
-        // Handle contact form submission
-        const contactForm = document.getElementById('contact-form');
-        contactForm.addEventListener('submit', (event) => {
-            event.preventDefault(); // Prevents default form submission
-            showModal('Mesaj trimis!', 'Vă mulțumim pentru mesaj. Vă vom contacta în curând.');
-            contactForm.reset();
-        });
-
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const targetSelector = this.getAttribute('href');
-                
-                // VERIFICARE CRITICĂ: Asigură-te că selectorul nu este doar "#"
-                if (targetSelector.startsWith('#') && targetSelector.length > 1) { 
-                    e.preventDefault();
-                    
-                    try {
-                        const targetElement = document.querySelector(targetSelector);
-                        if (targetElement) {
-                            targetElement.scrollIntoView({
-                                behavior: 'smooth'
-                            });
-                        }
-                    } catch (error) {
-                        // Ignorăm eroarea de sintaxă aici, dar o logăm pentru debug
-                        console.error('Smooth scroll failed for selector:', targetSelector, error);
-                    }
-                } else if (targetSelector === '#') {
-                    // Previne comportamentul implicit al link-urilor placeholder (#)
-                    e.preventDefault();
-                }
-            });
-        });
-    </script>
 </body>
 </html>
