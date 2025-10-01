@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ro" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate Now - Humanitarian Royal Family</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-white: #ffffff;
+            --color-dark: #1f2937;
+            --color-red: #dc2626;
+            --color-yellow: #facc15;
+            --color-light-gray: #f9fafb;
+            --color-deep-gold: #b4904b;
+        }
+        body {
+            background-color: var(--color-light-gray);
+            font-family: 'Inter', sans-serif;
+            color: var(--color-dark);
+            line-height: 1.6;
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--color-dark);
+        }
+        .red-button {
+            background-color: var(--color-red);
+            color: var(--color-white);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .red-button:hover {
+            background-color: #b91c1c; 
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
+            transform: translateY(-1px);
+        }
+        .yellow-border {
+            border-color: var(--color-yellow);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Antet (Header) - Simplificat pentru pagina de donații -->
+    <header class="bg-white p-4 md:p-6 shadow-sm border-b border-gray-100">
+        <nav class="container mx-auto flex justify-between items-center">
+            <a href="index.html#acasa" class="text-2xl font-bold text-[var(--color-dark)] hover:text-[var(--color-red)] transition-colors">
+                &larr; Back to Home
+            </a>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-4 md:px-8 py-16 md:py-24">
+        <div class="max-w-3xl mx-auto bg-white p-8 md:p-12 rounded-3xl shadow-2xl border-t-8 border-t-[var(--color-red)]">
+            <h1 class="text-5xl md:text-6xl font-extrabold text-center mb-4 text-[var(--color-red)]">
+                Make a Gift Today
+            </h1>
+            <p class="text-xl text-center mb-10 text-gray-700">
+                Your contribution fuels our mission. Every donation, big or small, brings hope and support to communities worldwide.
+            </p>
+
+            <form id="donation-form" class="space-y-6">
+                <!-- Suma Donației -->
+                <div class="text-center">
+                    <label class="block text-xl font-bold mb-4 text-gray-700">Choose Your Impact</label>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <button type="button" data-amount="25" class="donation-option bg-gray-100 border-2 border-transparent hover:border-[var(--color-red)] p-4 rounded-xl font-bold text-lg transition-all duration-200">$25</button>
+                        <button type="button" data-amount="50" class="donation-option bg-gray-100 border-2 border-transparent hover:border-[var(--color-red)] p-4 rounded-xl font-bold text-lg transition-all duration-200">$50</button>
+                        <button type="button" data-amount="100" class="donation-option bg-gray-100 border-2 border-transparent hover:border-[var(--color-red)] p-4 rounded-xl font-bold text-lg transition-all duration-200">$100</button>
+                        <button type="button" data-amount="0" class="donation-option bg-gray-100 border-2 border-transparent hover:border-[var(--color-red)] p-4 rounded-xl font-bold text-lg transition-all duration-200">Other Amount</button>
+                    </div>
+                </div>
+
+                <div class="mt-8">
+                    <label for="custom-amount" class="block mb-2 font-semibold text-gray-700">Custom Amount (USD)</label>
+                    <input type="number" id="custom-amount" name="amount" min="1" placeholder="Enter amount..." class="w-full border-b-2 border-gray-300 focus:border-[var(--color-red)] focus:outline-none p-3 text-2xl font-bold rounded-t-lg text-center" required>
+                </div>
+                
+                <hr class="border-gray-200">
+
+                <!-- Detalii Donator (Simplificat) -->
+                <div>
+                    <label for="name" class="block mb-2 font-semibold text-gray-700">Full Name</label>
+                    <input type="text" id="name" name="name" placeholder="John Doe" class="w-full border-b border-gray-300 focus:border-[var(--color-red)] focus:outline-none p-2 rounded-t-lg" required>
+                </div>
+                <div>
+                    <label for="email" class="block mb-2 font-semibold text-gray-700">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="email@example.com" class="w-full border-b border-gray-300 focus:border-[var(--color-red)] focus:outline-none p-2 rounded-t-lg" required>
+                </div>
+                
+                <!-- Butonul de Finalizare Donație -->
+                <div class="pt-6 text-center">
+                    <button type="submit" class="red-button font-bold py-4 px-16 rounded-full text-xl w-full max-w-sm transform transition-all duration-300 hover:scale-[1.01]">
+                        COMPLETE DONATION
+                    </button>
+                </div>
+            </form>
+            
+            <p class="text-center text-sm text-gray-500 mt-6">Secure payments powered by Placeholder Gateway.</p>
+        </div>
+    </main>
+    
+    <!-- Subsol (Footer) -->
+    <footer class="bg-white text-sm py-8 text-center border-t-4 border-gray-200 mt-12">
+        <p class="text-gray-600">&copy; 2024 Humanirtian Royal Family. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const amountInput = document.getElementById('custom-amount');
+            const options = document.querySelectorAll('.donation-option');
+            const form = document.getElementById('donation-form');
+
+            // Handle amount selection buttons
+            options.forEach(option => {
+                option.addEventListener('click', () => {
+                    const amount = option.getAttribute('data-amount');
+                    
+                    // Reset styling on all buttons
+                    options.forEach(btn => btn.classList.remove('bg-red-100', 'border-[var(--color-red)]'));
+                    
+                    if (amount === '0') {
+                        amountInput.value = '';
+                        amountInput.focus();
+                        option.classList.add('bg-red-100', 'border-[var(--color-red)]');
+                    } else {
+                        amountInput.value = amount;
+                        option.classList.add('bg-red-100', 'border-[var(--color-red)]');
+                    }
+                });
+            });
+
+            // Handle form submission (simulation)
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                if (amountInput.value > 0) {
+                    alert('Thank you for your donation of $' + amountInput.value + '! (Simulation successful)');
+                    form.reset();
+                } else {
+                    alert('Please enter a valid donation amount.');
+                }
+            });
+            
+            // Set default selection
+            document.querySelector('.donation-option[data-amount="50"]').click();
+        });
+    </script>
+</body>
+</html>
