@@ -1,150 +1,271 @@
 <!DOCTYPE html>
-<html lang="ro" class="scroll-smooth">
+<html lang="ro">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donate Now - Humanitarian Royal Family</title>
+    <title>Humanitarian Royal Family - Donații</title>
+    <!-- Incarca Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Incarca Fontul Inter (Tailwind Default) -->
     <style>
-        :root {
-            --color-white: #ffffff;
-            --color-dark: #1f2937;
-            --color-red: #dc2626;
-            --color-yellow: #facc15;
-            --color-light-gray: #f9fafb;
-            --color-deep-gold: #b4904b;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
         body {
-            background-color: var(--color-light-gray);
             font-family: 'Inter', sans-serif;
-            color: var(--color-dark);
-            line-height: 1.6;
+            background-color: #f7f7f7;
+            color: #1e1e1e;
         }
-        h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-            color: var(--color-dark);
+        .header-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
         }
+        /* Culori Personalizate */
+        .color-gold { color: #d4af37; } /* Auriu */
+        .bg-color-gold { background-color: #d4af37; }
+        .color-maroon { color: #800000; } /* Maro-roșu închis */
+        .bg-color-maroon { background-color: #800000; }
         .red-button {
-            background-color: var(--color-red);
-            color: var(--color-white);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background-color: #dc2626; /* Rosu mai puternic */
         }
         .red-button:hover {
-            background-color: #b91c1c; 
-            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.4);
-            transform: translateY(-1px);
+            background-color: #b91c1c;
         }
-        .yellow-border {
-            border-color: var(--color-yellow);
+        .heading-font {
+            font-family: 'Georgia', serif;
+            letter-spacing: -0.05em;
+        }
+
+        /* Stil pentru sume (radio buttons) */
+        .amount-radio:checked + label {
+            background-color: #d4af37; /* Auriu la selectie */
+            color: #800000; /* Text maro-rosu */
+            border-color: #800000;
+            box-shadow: 0 4px 8px -2px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Stiluri pentru butoanele de frecventa (noi) */
+        .frequency-radio:checked + label {
+            background-color: #800000; /* Maro la selectie */
+            color: white; 
+            border-color: #d4af37; /* Chenar Auriu */
+            box-shadow: 0 6px 15px -3px rgba(128, 0, 0, 0.3); /* Umbra vizibila */
+            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
 
-    <!-- Antet (Header) - Simplificat pentru pagina de donații -->
-    <header class="bg-white p-4 md:p-6 shadow-sm border-b border-gray-100">
-        <nav class="container mx-auto flex justify-between items-center">
-            <a href="index.html#acasa" class="text-2xl font-bold text-[var(--color-dark)] hover:text-[var(--color-red)] transition-colors">
-                &larr; Back to Home
+    <!-- Antet (Header) si Navigatie -->
+    <header class="bg-white header-shadow sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <!-- Logo - Link inapoi la index.html -->
+            <a href="index.html" class="flex items-center space-x-2">
+                <img src="https://placehold.co/40x40/d4af37/800000?text=HRF" alt="Humanitarian Royal Family Logo" class="h-10 w-10">
+                <span class="text-lg font-bold color-maroon hidden sm:block">HUMANITARIAN ROYAL FAMILY</span>
             </a>
-        </nav>
+            <!-- Meniu Navigatie (Simplificat pe pagina de donatii) -->
+            <nav class="space-x-8 text-sm font-semibold tracking-wide">
+                <a href="index.html#getinvolved" class="text-gray-600 hover:text-red-700 transition duration-300">ÎNAPOI ACASĂ</a>
+            </nav>
+        </div>
     </header>
 
-    <main class="container mx-auto px-4 md:px-8 py-16 md:py-24">
-        <div class="max-w-3xl mx-auto bg-white p-8 md:p-12 rounded-3xl shadow-2xl border-t-8 border-t-[var(--color-red)]">
-            <h1 class="text-5xl md:text-6xl font-extrabold text-center mb-4 text-[var(--color-red)]">
-                Make a Gift Today
-            </h1>
-            <p class="text-xl text-center mb-10 text-gray-700">
-                Your contribution fuels our mission. Every donation, big or small, brings hope and support to communities worldwide.
-            </p>
+    <main class="py-12 md:py-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
-            <form id="donation-form" class="space-y-6">
-                <!-- Suma Donației -->
-                <div class="text-center">
-                    <label class="block text-xl font-bold mb-4 text-gray-700">Choose Your Impact</label>
-                    <div class="flex flex-wrap justify-center gap-4">
-                        <button type="button" data-amount="25" class="donation-option bg-gray-100 border-2 border-transparent hover:border-[var(--color-red)] p-4 rounded-xl font-bold text-lg transition-all duration-200">$25</button>
-                        <button type="button" data-amount="50" class="donation-option bg-gray-100 border-2 border-transparent hover:border-[var(--color-red)] p-4 rounded-xl font-bold text-lg transition-all duration-200">$50</button>
-                        <button type="button" data-amount="100" class="donation-option bg-gray-100 border-2 border-transparent hover:border-[var(--color-red)] p-4 rounded-xl font-bold text-lg transition-all duration-200">$100</button>
-                        <button type="button" data-amount="0" class="donation-option bg-gray-100 border-2 border-transparent hover:border-[var(--color-red)] p-4 rounded-xl font-bold text-lg transition-all duration-200">Other Amount</button>
+            <!-- Titlul Paginii -->
+            <div class="text-center mb-12">
+                <h1 class="heading-font text-5xl font-extrabold color-maroon mb-4">
+                    FII PARTE DIN SCHIMBARE
+                </h1>
+                <p class="text-xl text-gray-600">Donația ta oferă ajutor esențial și sprijin de durată.</p>
+            </div>
+
+            <!-- Formularul de Donații -->
+            <div class="bg-white p-6 sm:p-10 rounded-xl shadow-2xl border-t-8 border-yellow-500">
+                <form action="#" method="POST" onsubmit="return handleDonation(event);">
+                    
+                    <!-- Pasul 1: Suma si Frecventa -->
+                    <h2 class="text-2xl font-bold color-maroon mb-6 border-b pb-2">1. ALEGE FRECVENȚA & SUMA</h2>
+                    
+                    <!-- Frecventa (O data / Lunar) - NOU STIL BUTOANE MARI -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                        
+                        <input type="radio" id="one-time" name="frequency" value="one-time" checked class="hidden frequency-radio">
+                        <label for="one-time" class="text-center p-4 rounded-xl border-4 border-gray-300 cursor-pointer transition duration-300 hover:bg-gray-100 font-extrabold text-xl color-maroon">
+                            O DATĂ
+                        </label>
+
+                        <input type="radio" id="monthly" name="frequency" value="monthly" class="hidden frequency-radio">
+                        <label for="monthly" class="text-center p-4 rounded-xl border-4 border-gray-300 cursor-pointer transition duration-300 hover:bg-gray-100 font-extrabold text-xl color-maroon">
+                            LUNAR (RECURRENT)
+                        </label>
                     </div>
-                </div>
+                    
+                    <div class="mb-6 border-b border-gray-200 pb-4">
+                        <p class="text-sm text-gray-500 text-center">Selectează o opțiune de mai jos sau introdu o altă sumă.</p>
+                    </div>
+                    
+                    <!-- Sume Prestabilite -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+                        <input type="radio" id="amount-50" name="amount" value="50" class="hidden amount-radio">
+                        <label for="amount-50" class="text-center p-4 rounded-lg border-2 border-gray-300 cursor-pointer transition duration-300 hover:bg-gray-100">
+                            <span class="block text-lg font-bold">50 RON</span>
+                        </label>
+                        
+                        <input type="radio" id="amount-100" name="amount" value="100" class="hidden amount-radio" checked>
+                        <label for="amount-100" class="text-center p-4 rounded-lg border-2 border-gray-300 cursor-pointer transition duration-300 hover:bg-gray-100">
+                            <span class="block text-lg font-bold">100 RON</span>
+                        </label>
 
-                <div class="mt-8">
-                    <label for="custom-amount" class="block mb-2 font-semibold text-gray-700">Custom Amount (USD)</label>
-                    <input type="number" id="custom-amount" name="amount" min="1" placeholder="Enter amount..." class="w-full border-b-2 border-gray-300 focus:border-[var(--color-red)] focus:outline-none p-3 text-2xl font-bold rounded-t-lg text-center" required>
-                </div>
-                
-                <hr class="border-gray-200">
+                        <input type="radio" id="amount-250" name="amount" value="250" class="hidden amount-radio">
+                        <label for="amount-250" class="text-center p-4 rounded-lg border-2 border-gray-300 cursor-pointer transition duration-300 hover:bg-gray-100">
+                            <span class="block text-lg font-bold">250 RON</span>
+                        </label>
 
-                <!-- Detalii Donator (Simplificat) -->
-                <div>
-                    <label for="name" class="block mb-2 font-semibold text-gray-700">Full Name</label>
-                    <input type="text" id="name" name="name" placeholder="John Doe" class="w-full border-b border-gray-300 focus:border-[var(--color-red)] focus:outline-none p-2 rounded-t-lg" required>
-                </div>
-                <div>
-                    <label for="email" class="block mb-2 font-semibold text-gray-700">Email Address</label>
-                    <input type="email" id="email" name="email" placeholder="email@example.com" class="w-full border-b border-gray-300 focus:border-[var(--color-red)] focus:outline-none p-2 rounded-t-lg" required>
-                </div>
-                
-                <!-- Butonul de Finalizare Donație -->
-                <div class="pt-6 text-center">
-                    <button type="submit" class="red-button font-bold py-4 px-16 rounded-full text-xl w-full max-w-sm transform transition-all duration-300 hover:scale-[1.01]">
-                        COMPLETE DONATION
-                    </button>
-                </div>
-            </form>
+                        <input type="radio" id="amount-other" name="amount" value="other" class="hidden amount-radio">
+                        <label for="amount-other" class="text-center p-4 rounded-lg border-2 border-gray-300 cursor-pointer transition duration-300 hover:bg-gray-100">
+                            <span class="block text-lg font-bold">Altă sumă</span>
+                        </label>
+                    </div>
+
+                    <!-- Input Alta Suma (Vizibil doar daca se alege "Altă sumă") -->
+                    <div id="other-amount-field" class="mb-8 hidden">
+                        <label for="custom-amount" class="block text-sm font-medium text-gray-700 mb-2">Introduceți suma dorită (RON)</label>
+                        <input type="number" id="custom-amount" name="custom-amount" min="10" placeholder="Ex: 500" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                    </div>
+
+                    <!-- Pasul 2: Detalii Donator -->
+                    <h2 class="text-2xl font-bold color-maroon mb-6 border-b pb-2 mt-8">2. DETALII DONATOR</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="first-name" class="block text-sm font-medium text-gray-700 mb-2">Prenume</label>
+                            <input type="text" id="first-name" name="first-name" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                        </div>
+                        <div>
+                            <label for="last-name" class="block text-sm font-medium text-gray-700 mb-2">Nume</label>
+                            <input type="text" id="last-name" name="last-name" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                        </div>
+                        <div class="md:col-span-2">
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Adresa de Email</label>
+                            <input type="email" id="email" name="email" required class="w-full p-3 border border-gray-300 rounded-lg focus:ring-red-500 focus:border-red-500">
+                        </div>
+                    </div>
+
+                    <div class="mt-8">
+                        <label class="flex items-center text-sm text-gray-600">
+                            <input type="checkbox" name="anonim" class="h-4 w-4 text-red-700 border-gray-300 rounded focus:ring-red-500">
+                            <span class="ml-2">Doresc să donez anonim (numele nu va fi afișat public).</span>
+                        </label>
+                    </div>
+
+                    <!-- Pasul 3: Finalizare -->
+                    <div class="mt-10 pt-6 border-t border-gray-200">
+                        <h2 class="text-2xl font-bold color-maroon mb-6 border-b pb-2">3. FINALIZARE</h2>
+                        <div class="flex items-center justify-between mb-6 p-4 bg-gray-100 rounded-lg border border-gray-300">
+                            <span class="text-lg font-semibold text-gray-800">Suma de donat:</span>
+                            <span id="display-amount" class="text-2xl font-extrabold color-maroon">100 RON</span>
+                        </div>
+                        
+                        <!-- Butonul de Plata - Rosu aprins -->
+                        <button type="submit" class="red-button text-white font-bold py-4 px-10 rounded-full text-lg w-full uppercase tracking-wider transition duration-300 shadow-xl hover:shadow-2xl">
+                            DONEAZĂ ACUM
+                        </button>
+
+                        <p class="mt-4 text-xs text-center text-gray-500">
+                            Tranzacțiile sunt procesate în siguranță de Stripe/MobilPay (simulare).
+                        </p>
+                        
+                        <!-- Loc pentru Mesaje de Confirmare/Eroare -->
+                        <div id="message-box" class="mt-6 p-4 bg-red-100 text-red-700 rounded-lg border border-red-300 hidden">
+                            Aceasta este o simulare. În mediul real, ați fi redirecționat către un procesator de plăți.
+                        </div>
+                    </div>
+
+                </form>
+            </div>
             
-            <p class="text-center text-sm text-gray-500 mt-6">Secure payments powered by Placeholder Gateway.</p>
         </div>
     </main>
-    
+
     <!-- Subsol (Footer) -->
-    <footer class="bg-white text-sm py-8 text-center border-t-4 border-gray-200 mt-12">
-        <p class="text-gray-600">&copy; 2024 Humanirtian Royal Family. All Rights Reserved.</p>
+    <footer class="bg-white border-t border-gray-200 py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-500">
+            <p>&copy; 2023 Humanirtian Royal Family</p>
+        </div>
     </footer>
 
+    <!-- Script JS pentru logica formularului -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const amountInput = document.getElementById('custom-amount');
-            const options = document.querySelectorAll('.donation-option');
-            const form = document.getElementById('donation-form');
+            const amountRadios = document.querySelectorAll('input[name="amount"]');
+            const frequencyRadios = document.querySelectorAll('input[name="frequency"]');
+            const customAmountInput = document.getElementById('custom-amount');
+            const otherAmountField = document.getElementById('other-amount-field');
+            const displayAmount = document.getElementById('display-amount');
+            const messageBox = document.getElementById('message-box');
 
-            // Handle amount selection buttons
-            options.forEach(option => {
-                option.addEventListener('click', () => {
-                    const amount = option.getAttribute('data-amount');
-                    
-                    // Reset styling on all buttons
-                    options.forEach(btn => btn.classList.remove('bg-red-100', 'border-[var(--color-red)]'));
-                    
-                    if (amount === '0') {
-                        amountInput.value = '';
-                        amountInput.focus();
-                        option.classList.add('bg-red-100', 'border-[var(--color-red)]');
-                    } else {
-                        amountInput.value = amount;
-                        option.classList.add('bg-red-100', 'border-[var(--color-red)]');
-                    }
-                });
-            });
-
-            // Handle form submission (simulation)
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
+            function updateDisplayAmount() {
+                let selectedAmount = '0 RON';
+                const selectedRadio = document.querySelector('input[name="amount"]:checked');
                 
-                if (amountInput.value > 0) {
-                    alert('Thank you for your donation of $' + amountInput.value + '! (Simulation successful)');
-                    form.reset();
+                if (selectedRadio.value === 'other') {
+                    // Ascunde/Arata campul de alta suma
+                    otherAmountField.classList.remove('hidden');
+                    const customValue = parseFloat(customAmountInput.value) || 0;
+                    selectedAmount = customValue > 0 ? `${customValue.toFixed(2)} RON` : 'Suma necunoscută';
                 } else {
-                    alert('Please enter a valid donation amount.');
+                    otherAmountField.classList.add('hidden');
+                    selectedAmount = `${selectedRadio.value}.00 RON`;
                 }
+                
+                displayAmount.textContent = selectedAmount;
+            }
+
+            // Asculta schimbarile la radiourile de suma
+            amountRadios.forEach(radio => {
+                radio.addEventListener('change', updateDisplayAmount);
             });
+
+            // Asculta schimbarile la inputul de alta suma
+            customAmountInput.addEventListener('input', updateDisplayAmount);
             
-            // Set default selection
-            document.querySelector('.donation-option[data-amount="50"]').click();
+            // Seteaza starea initiala
+            updateDisplayAmount();
+
+            // Functia de simulare a donatiei (fara a folosi alert/confirm)
+            window.handleDonation = function(event) {
+                event.preventDefault();
+                
+                const selectedAmountRadio = document.querySelector('input[name="amount"]:checked');
+                let finalAmount = selectedAmountRadio.value;
+
+                if (finalAmount === 'other') {
+                    finalAmount = parseFloat(customAmountInput.value);
+                    if (!finalAmount || finalAmount < 10) {
+                        messageBox.textContent = 'Vă rugăm introduceți o sumă validă de cel puțin 10 RON.';
+                        messageBox.classList.remove('hidden');
+                        messageBox.classList.remove('bg-green-100', 'text-green-700');
+                        messageBox.classList.add('bg-red-100', 'text-red-700');
+                        return false;
+                    }
+                } else {
+                    finalAmount = parseFloat(finalAmount);
+                }
+
+                const frequency = document.querySelector('input[name="frequency"]:checked').value === 'monthly' ? 'Lunar' : 'O dată';
+                const firstName = document.getElementById('first-name').value;
+
+                // Afiseaza mesaj de simulare
+                messageBox.textContent = `SIMULARE REUȘITĂ: Vă mulțumim, ${firstName}! Ați ales să donați suma de ${finalAmount.toFixed(2)} RON (${frequency}). În mediul real, ați fi redirecționat către pagina de plată securizată.`;
+                messageBox.classList.remove('hidden');
+                messageBox.classList.remove('bg-red-100', 'text-red-700');
+                messageBox.classList.add('bg-green-100', 'text-green-700');
+
+                // Daca ar fi fost real, codul ar continua aici cu redirect catre procesatorul de plati.
+                console.log(`Donation attempt: ${finalAmount} RON, Frequency: ${frequency}`);
+
+                return false; // Previne trimiterea reala a formularului
+            }
         });
     </script>
 </body>
